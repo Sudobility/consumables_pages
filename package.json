@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/consumables_pages",
-  "version": "0.0.61",
+  "version": "0.0.62",
   "description": "Web UI components for consumable credits (credit store, purchase history, usage history)",
   "type": "module",
   "main": "./dist/index.js",
@@ -30,15 +30,15 @@
     "prepublishOnly": "bun run build"
   },
   "peerDependencies": {
-    "@sudobility/consumables_client": "^0.0.30",
-    "@sudobility/design": "^1.1.58",
-    "@sudobility/types": "^1.9.71",
+    "@sudobility/consumables_client": "^0.0.31",
+    "@sudobility/design": "^1.1.60",
+    "@sudobility/types": "^1.9.72",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@sudobility/consumables_client": "^0.0.30",
-    "@sudobility/design": "^1.1.58",
+    "@sudobility/consumables_client": "^0.0.31",
+    "@sudobility/design": "^1.1.60",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/bun": "^1.2.8",
@@ -69,6 +69,6 @@
   "license": "BUSL-1.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/johnqh/consumables_pages.git"
+    "url": "https://github.com/Sudobility/consumables_pages.git"
   }
 }
