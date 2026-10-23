@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/consumables_pages",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "description": "Web UI components for consumable credits (credit store, purchase history, usage history)",
   "type": "module",
   "main": "./dist/index.js",
