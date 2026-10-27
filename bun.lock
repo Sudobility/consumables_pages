@@ -6,7 +6,7 @@
       "name": "@sudobility/consumables_pages",
       "devDependencies": {
         "@eslint/js": "~10.0.1",
-        "@sudobility/consumables_client": "^0.0.37",
+        "@sudobility/consumables_client": "^0.0.38",
         "@sudobility/design": "^1.1.66",
         "@testing-library/jest-dom": "~7.0.1",
         "@testing-library/react": "~16.3.3",
@@ -33,7 +33,7 @@
         "vitest": "~4.1.12",
       },
       "peerDependencies": {
-        "@sudobility/consumables_client": "^0.0.37",
+        "@sudobility/consumables_client": "^0.0.38",
         "@sudobility/design": "^1.1.66",
         "@sudobility/types": "^1.9.76",
         "react": "^18.0.0 || ^19.0.0",
@@ -232,7 +232,7 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/consumables_client": ["@sudobility/consumables_client@0.0.37", "https://npm.pkg.github.com/download/@sudobility/consumables_client/0.0.37/cb84d3dbd46dc5b644e763695e278e6bb0d295b6", { "peerDependencies": { "@revenuecat/purchases-js": "^1.0.0", "@sudobility/types": "^1.9.76", "react": "^18.0.0 || ^19.0.0", "react-native-purchases": ">=7.0.0" } }, "sha512-ctx34KoeMZ4giAK27sC5/3YuKD1Z6SUEM7szZq2X7pJfJi/XGKE/nBTt417L4CctYmB901GtUwuJrhsBip9Vag=="],
+    "@sudobility/consumables_client": ["@sudobility/consumables_client@0.0.38", "https://npm.pkg.github.com/download/@sudobility/consumables_client/0.0.38/22d40d0c362bc08e15a038fa2869afaa81d686e8", { "peerDependencies": { "@revenuecat/purchases-js": "^1.0.0", "@sudobility/types": "^1.9.76", "react": "^18.0.0 || ^19.0.0", "react-native-purchases": ">=7.0.0" } }, "sha512-mlKL1omuea6BaJraaXPvvUYgPSNR6DwPvZgiAenomIyrCEuls7T0vDt5wZ11Dbuso25nv71VodKwchlPFMnCOw=="],
 
     "@sudobility/design": ["@sudobility/design@1.1.66", "https://npm.pkg.github.com/download/@sudobility/design/1.1.66/08ff28eba0e05a9e6916a0aae67ac2c36df590f2", { "peerDependencies": { "clsx": ">=2.0.0", "tailwind-merge": ">=2.0.0" } }, "sha512-E+5HxPKHsujJQMYhtdgtzcGkGtaHhuWpMBd05n+dq/FMihrLT8GeMj6G75XpaxqQmbWYOfkjHEUV2GFcECzeNw=="],
 
