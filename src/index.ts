@@ -35,3 +35,13 @@ export type {
 export type { RevenueCatCreditStoreProps } from './RevenueCatCreditStore';
 
 export type { ConsumableSource } from '@sudobility/types';
+
+// Web RevenueCat adapter (implements consumables_client's ConsumablesAdapter).
+// Inject via initializeConsumables({ adapter: createConsumablesWebAdapter() }).
+export {
+  configureConsumablesWebAdapter,
+  createConsumablesWebAdapter,
+  setConsumablesWebUser,
+  clearConsumablesWebUser,
+  hasConsumablesWebUser,
+} from './adapters';

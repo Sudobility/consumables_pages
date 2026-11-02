@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/consumables_pages",
-  "version": "0.0.70",
+  "version": "0.0.71",
   "description": "Web UI components for consumable credits (credit store, purchase history, usage history)",
   "type": "module",
   "main": "./dist/index.js",
@@ -30,7 +30,8 @@
     "prepublishOnly": "bun run build"
   },
   "peerDependencies": {
-    "@sudobility/consumables_client": "^0.0.38",
+    "@revenuecat/purchases-js": "^1.0.0",
+    "@sudobility/consumables_client": "^0.0.39",
     "@sudobility/design": "^1.1.66",
     "@sudobility/types": "^1.9.76",
     "react": "^18.0.0 || ^19.0.0",
@@ -38,7 +39,8 @@
   },
   "devDependencies": {
     "@eslint/js": "~10.0.1",
-    "@sudobility/consumables_client": "^0.0.38",
+    "@revenuecat/purchases-js": "~1.73.1",
+    "@sudobility/consumables_client": "^0.0.39",
     "@sudobility/design": "^1.1.66",
     "@testing-library/jest-dom": "~7.0.1",
     "@testing-library/react": "~16.3.3",
