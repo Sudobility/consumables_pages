@@ -7,8 +7,8 @@
       "devDependencies": {
         "@eslint/js": "~10.0.1",
         "@revenuecat/purchases-js": "~1.73.1",
-        "@sudobility/consumables_client": "^0.0.39",
-        "@sudobility/design": "^1.1.66",
+        "@sudobility/consumables_client": "^0.0.40",
+        "@sudobility/design": "^1.1.68",
         "@testing-library/jest-dom": "~7.0.1",
         "@testing-library/react": "~16.3.3",
         "@types/bun": "~1.4.4",
@@ -35,9 +35,9 @@
       },
       "peerDependencies": {
         "@revenuecat/purchases-js": "^1.0.0",
-        "@sudobility/consumables_client": "^0.0.39",
-        "@sudobility/design": "^1.1.66",
-        "@sudobility/types": "^1.9.76",
+        "@sudobility/consumables_client": "^0.0.40",
+        "@sudobility/design": "^1.1.68",
+        "@sudobility/types": "^1.9.78",
         "react": "^18.0.0 || ^19.0.0",
         "react-dom": "^18.0.0 || ^19.0.0",
       },
@@ -202,9 +202,9 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/consumables_client": ["@sudobility/consumables_client@0.0.39", "https://npm.pkg.github.com/download/@sudobility/consumables_client/0.0.39/25e0c09ea0de23fa191c078f29d7720a8e8aa82d", { "peerDependencies": { "@sudobility/types": "^1.9.76", "react": "^18.0.0 || ^19.0.0" } }, "sha512-oipHSKkwE4AJlVUBhT+aQcqx+lJpEa3t24LH9mJfqulNmhab+0XbvSWgkJBAiWVtD/y8XwGHBhhG+NMOPWs70w=="],
+    "@sudobility/consumables_client": ["@sudobility/consumables_client@0.0.40", "https://npm.pkg.github.com/download/@sudobility/consumables_client/0.0.40/1a9cd76dce31592fc240f061c3f2cd97a86281af", { "peerDependencies": { "@sudobility/types": "^1.9.78", "react": "^18.0.0 || ^19.0.0" } }, "sha512-Vdgha4Z779o3AVqtK0RruL8Dh3NHFmcX2XeiMGD/0Zaje/BIB4pJXH6zQLHYRECkQ0OBKDRg3KO6mp6gGl3BDQ=="],
 
-    "@sudobility/design": ["@sudobility/design@1.1.66", "https://npm.pkg.github.com/download/@sudobility/design/1.1.66/08ff28eba0e05a9e6916a0aae67ac2c36df590f2", { "peerDependencies": { "clsx": ">=2.0.0", "tailwind-merge": ">=2.0.0" } }, "sha512-E+5HxPKHsujJQMYhtdgtzcGkGtaHhuWpMBd05n+dq/FMihrLT8GeMj6G75XpaxqQmbWYOfkjHEUV2GFcECzeNw=="],
+    "@sudobility/design": ["@sudobility/design@1.1.68", "https://npm.pkg.github.com/download/@sudobility/design/1.1.68/289478a5caaadcbf38fa9fdec554edde15b3d9d2", { "peerDependencies": { "clsx": ">=2.0.0", "tailwind-merge": ">=2.0.0" } }, "sha512-AT56VZlPkJSgiNSC4Shl1MOXSX2aKJ/rhDsTOsV+l7TGmlHKMH8D+8epE/at2qO9+LZaPNEEm3lANBehZej64A=="],
 
     "@sudobility/types": ["@sudobility/types@1.9.76", "https://npm.pkg.github.com/download/@sudobility/types/1.9.76/71635156f72fd9461107d5f147b3dc1c49f863d0", {}, "sha512-b7maZHR5wM84VlQ+l9R+2guzSOrExog6OUNy1oCe7h0abW13syycmnLQL0g+qql0aQ84qTB4A0mJelhY3Vef4Q=="],
 

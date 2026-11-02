@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/consumables_pages",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "description": "Web UI components for consumable credits (credit store, purchase history, usage history)",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
     "CLAUDE.md"
   ],
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && node scripts/fix-esm-imports.mjs",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
     "typecheck": "bunx tsc --noEmit",
@@ -31,17 +31,17 @@
   },
   "peerDependencies": {
     "@revenuecat/purchases-js": "^1.0.0",
-    "@sudobility/consumables_client": "^0.0.39",
-    "@sudobility/design": "^1.1.66",
-    "@sudobility/types": "^1.9.76",
+    "@sudobility/consumables_client": "^0.0.40",
+    "@sudobility/design": "^1.1.68",
+    "@sudobility/types": "^1.9.78",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "~10.0.1",
     "@revenuecat/purchases-js": "~1.73.1",
-    "@sudobility/consumables_client": "^0.0.39",
-    "@sudobility/design": "^1.1.66",
+    "@sudobility/consumables_client": "^0.0.40",
+    "@sudobility/design": "^1.1.68",
     "@testing-library/jest-dom": "~7.0.1",
     "@testing-library/react": "~16.3.3",
     "@types/bun": "~1.4.4",
