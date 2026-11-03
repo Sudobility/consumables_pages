@@ -8,7 +8,7 @@
         "@eslint/js": "~10.0.1",
         "@revenuecat/purchases-js": "~1.73.1",
         "@sudobility/consumables_client": "^0.0.40",
-        "@sudobility/design": "^1.1.68",
+        "@sudobility/design": "^1.1.69",
         "@testing-library/jest-dom": "~7.0.1",
         "@testing-library/react": "~16.3.3",
         "@types/bun": "~1.4.4",
@@ -36,7 +36,7 @@
       "peerDependencies": {
         "@revenuecat/purchases-js": "^1.0.0",
         "@sudobility/consumables_client": "^0.0.40",
-        "@sudobility/design": "^1.1.68",
+        "@sudobility/design": "^1.1.69",
         "@sudobility/types": "^1.9.78",
         "react": "^18.0.0 || ^19.0.0",
         "react-dom": "^18.0.0 || ^19.0.0",
@@ -204,7 +204,7 @@
 
     "@sudobility/consumables_client": ["@sudobility/consumables_client@0.0.40", "https://npm.pkg.github.com/download/@sudobility/consumables_client/0.0.40/1a9cd76dce31592fc240f061c3f2cd97a86281af", { "peerDependencies": { "@sudobility/types": "^1.9.78", "react": "^18.0.0 || ^19.0.0" } }, "sha512-Vdgha4Z779o3AVqtK0RruL8Dh3NHFmcX2XeiMGD/0Zaje/BIB4pJXH6zQLHYRECkQ0OBKDRg3KO6mp6gGl3BDQ=="],
 
-    "@sudobility/design": ["@sudobility/design@1.1.68", "https://npm.pkg.github.com/download/@sudobility/design/1.1.68/289478a5caaadcbf38fa9fdec554edde15b3d9d2", { "peerDependencies": { "clsx": ">=2.0.0", "tailwind-merge": ">=2.0.0" } }, "sha512-AT56VZlPkJSgiNSC4Shl1MOXSX2aKJ/rhDsTOsV+l7TGmlHKMH8D+8epE/at2qO9+LZaPNEEm3lANBehZej64A=="],
+    "@sudobility/design": ["@sudobility/design@1.1.69", "https://npm.pkg.github.com/download/@sudobility/design/1.1.69/8dc2caf34fda3cd4ccdf67a6e9aecfa40f013fcd", { "peerDependencies": { "clsx": ">=2.0.0", "tailwind-merge": ">=2.0.0" } }, "sha512-MUW9bSwis7thR9GBhqtil6RzgTZVPymqy4GAqFGDBUX7o1FcfmlhnDWcc4acR2Hf3OqkxHGm9gFuMW83/ufuiA=="],
 
     "@sudobility/types": ["@sudobility/types@1.9.76", "https://npm.pkg.github.com/download/@sudobility/types/1.9.76/71635156f72fd9461107d5f147b3dc1c49f863d0", {}, "sha512-b7maZHR5wM84VlQ+l9R+2guzSOrExog6OUNy1oCe7h0abW13syycmnLQL0g+qql0aQ84qTB4A0mJelhY3Vef4Q=="],
 
