@@ -3,172 +3,94 @@
 > **Git policy — never auto-commit or auto-push.** Leave your work in the working tree.
 > Run `git commit`, `git push`, `gh pr create`, or `scripts/push_all.sh` **only when the user
 > explicitly asks in that turn**. Approval for an earlier change does not carry forward, and
-> finishing a task is not permission to commit it.
+> finishing a task is not permission to commit it. Stay on the current branch; do not create
+> feature branches for code changes.
 
-Web-only UI components for consumable credits system.
+React web UI components for the consumable-credits system (credit store,
+purchase/usage history, paywall dialog, coupon pages, balance badge).
 
-**npm**: `@sudobility/consumables_pages` (public)
-**Version**: 0.0.7
-**License**: BUSL-1.1
+- **npm name**: `@sudobility/consumables_pages` — published to **GitHub Packages**
+  (`.npmrc`: `@sudobility:registry=https://npm.pkg.github.com`), not public npm.
+- **License**: BUSL-1.1
 
-## Tech Stack
+## Stack
 
-- **Language**: TypeScript 5.9.3 (strict mode, JSX)
-- **Runtime**: Bun
-- **Package Manager**: Bun (never npm/yarn/pnpm)
-- **Build**: TypeScript compiler via `tsconfig.build.json` (ESM only)
-- **Test**: Vitest 4.x with jsdom environment, React Testing Library
-- **Styling**: Tailwind CSS classes (consumer provides Tailwind)
-- **JSX**: react-jsx (React 18/19)
-
-## Project Structure
-
-```
-src/
-├── index.ts                   # Barrel exports (components + types)
-├── types.ts                   # All prop/label/formatter interfaces
-├── LoadingSpinner.tsx         # Shared internal loading spinner with ARIA attributes
-├── CreditStorePage.tsx        # Presentational balance + package grid
-├── RevenueCatCreditStore.tsx  # Connected catalog, balance, and purchase flow
-├── PurchaseHistoryPage.tsx    # Responsive table/cards of purchase records
-├── UsageHistoryPage.tsx       # Responsive table/cards of usage records
-├── CreditBalanceBadge.tsx     # Small inline badge for topbar integration
-└── __tests__/
-    ├── setup.ts                      # Vitest setup (jsdom config)
-    ├── CreditBalanceBadge.test.tsx
-    ├── CreditStorePage.test.tsx
-    ├── PurchaseHistoryPage.test.tsx
-    └── UsageHistoryPage.test.tsx
-```
+- TypeScript (strict, `jsx: react-jsx`) targeting React 18/19. Bun is the package manager.
+- **Build**: Vite library mode (ESM only, single `dist/index.js` + `.d.ts` via `vite-plugin-dts`).
+- **Test**: Vitest + jsdom + React Testing Library.
+- **Style**: Tailwind utility classes (host provides Tailwind); theming via `@sudobility/design`.
 
 ## Commands
 
 ```bash
-bun run build        # Build ESM via tsc -p tsconfig.build.json
-bun run dev          # Watch mode (tsc --watch)
-bun run clean        # Remove dist/
-bun run typecheck    # TypeScript check (bunx tsc --noEmit)
-bun test             # Run tests (vitest run)
-bun run test:watch   # Watch tests
-bun run lint         # ESLint
-bun run lint:fix     # ESLint with auto-fix
-bun run format       # Prettier format
+bun run build        # tsc (typecheck gate) -> vite build -> scripts/fix-esm-imports.mjs
+bun run dev          # tsc --watch
+bun run typecheck    # bunx tsc --noEmit
+bun run test:unit    # vitest run    (NOTE: `bun test` runs Bun's own runner, NOT vitest)
+bun run test:watch   # vitest watch
+bun run lint         # bunx eslint src   (lint:fix adds --fix)
+bun run format       # prettier --write src
+bun run verify       # typecheck + lint + test:unit + build
+bun run clean        # rm -rf dist
 ```
 
-## Components
+## Architecture
 
-### CreditStorePage
-- Balance display panel (blue box) when authenticated
-- Error display, login prompt for unauthenticated users
-- Loading spinner
-- Responsive grid of credit packages (1 col -> 2 col sm -> 3 col lg)
-- Buy buttons with purchasing state
-- Props: `CreditStorePageProps` (isAuthenticated, balance, packages, labels, formatters, callbacks)
+Two kinds of components, both exported from `src/index.ts`:
 
-### RevenueCatCreditStore
-- Connected alternative for apps that initialize `consumables_client`.
-- Loads localized packages and starts purchases through RevenueCat's platform SDK; the backend catalog supplies the allowed products and authoritative credit amount.
-- Props: offering ID, authentication state, login callback, labels, and formatters.
+- **Presentational** — `CreditStorePage`, `PurchaseHistoryPage`, `UsageHistoryPage`,
+  `CreditBalanceBadge`, `CreditPaywallDialog`. All data, callbacks, loading/error state,
+  user-facing strings (`*Labels`) and formatting (`*Formatters`) arrive via props. No internal
+  data fetching, no hooks, no hardcoded copy. Prop types live in `src/types.ts`.
+- **Connected** — `RevenueCatCreditStore`, `CreditHistoryPage`, `RedeemCreditCouponPage`,
+  `ManageCreditCouponsPage`. These call `@sudobility/consumables_client` hooks/clients at
+  runtime (e.g. `usePurchaseHistory`, `useUsageHistory`, `ConsumablesApiClient`) and render the
+  presentational components with the results. The host must initialize the consumables client
+  singleton before rendering these.
 
-### PurchaseHistoryPage
-- Desktop: `<table>` with columns (date, credits, source, amount)
-- Mobile: card layout (sm:hidden / hidden sm:block pattern)
-- "Load more" pagination button
-- Props: `PurchaseHistoryPageProps` (purchases, labels, formatters, onLoadMore, hasMore)
+`src/adapters/` holds the **web RevenueCat adapter** — the web implementation of
+`consumables_client`'s `ConsumablesAdapter` seam (lives here so platform-agnostic logic never
+depends on a platform SDK). Inject via `initializeConsumables({ adapter: createConsumablesWebAdapter() })`.
+`@revenuecat/purchases-js` is lazy-loaded.
 
-### UsageHistoryPage
-- Desktop: `<table>` with columns (date, filename)
-- Mobile: card layout
-- "Load more" pagination button
-- Props: `UsageHistoryPageProps` (usages, labels, formatters, onLoadMore, hasMore)
+`src/controls.ts` is the single source for every control's class string.
 
-### CreditBalanceBadge
-- Inline pill badge showing credit count with coin SVG icon
-- Blue when balance > 0, red when balance is 0
-- Optional `onClick` makes it a `<button>` instead of `<span>`
-- Loading state shows animated "..."
-- Returns `null` when balance is null and not loading
+## Conventions
 
-## Dependencies
-
-### Peer Dependencies
-- `@sudobility/consumables_client` ^0.0.6 -- TypeScript types only (CreditPackage)
-- `@sudobility/design` ^1.1.56 -- theme-aware classes; external to the build, so the host's configured copy is the one used
-- `@sudobility/types` ^1.9.53 -- shared types (ConsumablePurchaseRecord, ConsumableUsageRecord)
-- `react` ^18.0.0 || ^19.0.0
-- `react-dom` ^18.0.0 || ^19.0.0
-
-### Dev Dependencies
-- TypeScript ~5.9.3, Vitest ^4.0.4, @testing-library/react ^16.x, @testing-library/jest-dom ^6.x
-- jsdom ^28.x, Vite ^7.x, ESLint ^9.x, Prettier ^3.x
-
-## Build Configuration
-
-- **tsconfig.json**: Used for type checking (`noEmit: true`), includes `allowImportingTsExtensions`
-- **tsconfig.build.json**: Extends tsconfig.json, sets `noEmit: false`, `allowImportingTsExtensions: false`, `rootDir: ./src`
-- **vitest.config.ts**: jsdom environment, globals enabled, setup file at `./src/__tests__/setup.ts`
-
-## Type Architecture
-
-All component prop types are defined in `src/types.ts`:
-- **Labels interfaces** (`CreditStorePageLabels`, etc.) -- all user-facing strings for i18n
-- **Formatters interfaces** (`CreditStorePageFormatters`, etc.) -- functions for formatting credits, dates, amounts, sources
-- **Props interfaces** (`CreditStorePageProps`, etc.) -- combine data, labels, formatters, and callbacks
-
-## Related Projects
-
-- **consumables_client** (`@sudobility/consumables_client`) -- Peer dependency that provides hooks (`useBalance`, `usePurchaseCredits`, etc.) and data types. This package does NOT call those hooks internally; the consuming app calls them and passes data as props.
-- **@sudobility/types** -- Shared type definitions used across the consumables ecosystem.
-
-Dependency direction: `consumables_pages` depends on `consumables_client` (peer dep for types only, not runtime calls)
-
-## Coding Patterns
-
-- **Props-driven components (no internal state)**: Components receive all data and callbacks via props. They do not call hooks, manage state, or fetch data. This makes them pure presentational components.
-- **Customizable labels and formatters for i18n**: All user-facing text is passed in via `labels` props, and numeric/date formatting uses `formatter` props. Never hardcode user-visible strings inside components.
-- **Responsive design with Tailwind sm breakpoint**: Components use `hidden sm:block` for desktop tables and `sm:hidden` for mobile cards. CreditStorePage uses `sm:grid-cols-2 lg:grid-cols-3` for its grid.
-- **No direct CSS**: All styling uses Tailwind utility classes. Do not introduce CSS files, CSS modules, or styled-components.
-- **Conditional wrapper element**: CreditBalanceBadge uses `const Wrapper = onClick ? "button" : "span"` for semantic HTML.
-
-## Tailwind CSS Setup
-
-Consumer apps must include this package's output files in their Tailwind `content` configuration so that Tailwind classes used by these components are included in the final CSS build. Components also support dark mode via `dark:` variant classes -- enable dark mode in the consuming app's Tailwind config to use them.
-
-**Tailwind v3 (`tailwind.config.js`)**:
-```js
-module.exports = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@sudobility/consumables_pages/dist/**/*.js",
-  ],
-  // ...
-};
-```
-
-**Tailwind v4 (CSS-based config)**:
-```css
-@import "tailwindcss";
-@source "../node_modules/@sudobility/consumables_pages/dist";
-```
+- **The design system is the only source of colour.** No palette classes (`bg-blue-600`,
+  `text-white`, `bg-theme-*`) anywhere. Every control's classes come from `src/controls.ts`
+  (`primaryButtonClass()`, `quietButtonClass()`, `inputClass()`), which read `variants.*` from
+  `@sudobility/design`. These are **functions called during render**, never module-level
+  constants — a constant computed at import time can run before the host configures its theme and
+  would freeze the un-themed palette. `FIELD_HEIGHT_CLASS` (`h-11`) keeps a field and the button
+  beside it the same height. `src/__tests__/design-system.test.ts` enforces all of this with an
+  **empty allow list**.
+- Responsive pattern: `hidden sm:block` desktop tables, `sm:hidden` mobile cards;
+  `sm:grid-cols-2 lg:grid-cols-3` for the store grid. Components also ship `dark:` variants.
+- No CSS files / modules / styled-components — Tailwind utilities only.
 
 ## Gotchas
 
-- **Consumer app must provide Tailwind CSS**: This package emits Tailwind class names but does NOT bundle Tailwind itself. If the consuming app does not have Tailwind configured, components will render unstyled. This is by design. See the "Tailwind CSS Setup" section above for required content path configuration.
-- **`@sudobility/design` is a peer and a build external, never bundled.** The host calls `configureTheme()` on its own copy; a copy bundled into `dist/index.js` is a second module instance that nobody configured, so it answers with the un-themed palette. That shipped: a blue Buy button in an app whose primary is red, with every test passing, because the tests run un-themed too.
-- **No palette colours, and every control's classes come from `src/controls.ts`.** `primaryButtonClass()`, `quietButtonClass()` and `inputClass()` read `variants.*` from the design system, as functions called while rendering (a constant computed at import can be computed before the host configures its theme). A button written as palette classes is one the theme cannot reach and one the host's Tailwind may not generate a rule for — the Redeem button was white text on no background. `FIELD_HEIGHT_CLASS` gives a field and the button beside it one height. `src/__tests__/design-system.test.ts` enforces all of this with an empty allow list.
-- **The coupon pages' copy is English and hardcoded** (`CreditCouponPages.tsx`), unlike the store and history pages, which take `labels`. A host in another language shows English there until they take labels too.
-- **CreditStorePage remains presentational**: `RevenueCatCreditStore` is the opt-in connected wrapper; it owns the consumables hooks and passes results to the same page component.
-- **No internal state**: Components derive everything from props. If you need loading states or error states, they must be passed in as props, not managed internally with `useState`.
-- **Peer dependency on consumables_client**: `RevenueCatCreditStore` uses its hooks at runtime; consuming apps must initialize the client singleton before rendering the connected store.
-- **`tsconfig.json` has `noEmit: true`**: The main tsconfig is for checking only. Building requires `tsconfig.build.json` (via `bun run build`).
+- **`@sudobility/design` is a peer dep and a Vite build external — never bundled** (see the
+  `external` list in `vite.config.ts`). The host calls `configureTheme()` on its own copy; a
+  bundled copy is a second, unconfigured module instance that answers with the un-themed palette.
+  That once shipped a blue Buy button into a red app with every test green (tests also run
+  un-themed). `react`, `react-dom`, `consumables_client`, and `@sudobility/types` are external too.
+- **`consumables_client` is a runtime peer dep, not types-only.** The connected components above
+  call its hooks/clients; `@sudobility/types` supplies shared record types
+  (`ConsumablePurchaseRecord`, `ConsumableUsageRecord`, `ConsumableSource`).
+- **Host must provide & configure Tailwind** and include `dist/**/*.js` in its content sources,
+  or components render unstyled (by design — Tailwind is not bundled). See README.
+- **Coupon pages' copy is hardcoded English** (`CreditCouponPages.tsx`), unlike the store/history
+  pages which take `labels`. A non-English host shows English there until they also take labels.
+- **Build is Vite, not plain tsc.** `tsc` in the build script is only a typecheck gate
+  (`tsconfig.json` has `noEmit: true`); the actual emit is `vite build`, then
+  `scripts/fix-esm-imports.mjs` rewrites relative specifiers to Node-resolvable paths.
+  `tsconfig.build.json` exists but is not referenced by current scripts.
 
 ## Publishing
 
-- Package: `@sudobility/consumables_pages` (public on npm)
-- Build before publish: `bun run build` produces ESM output in `dist/`
-- Bump version in `package.json`, then `npm publish --access public`
-- Ensure `consumables_client` peer dependency version range is correct in `package.json` before publishing
-
-## Git Workflow
-
-- Do not use feature branches for code changes. Always stay on the current branch.
+CI (`.github/workflows/ci-cd.yml`, the shared `johnqh/workflows` unified pipeline) publishes to
+GitHub Packages on push to `main`/`develop`. For a manual publish: bump `version` in
+`package.json`, confirm peer-dep ranges, then `bun run build` (via `prepublishOnly`). `files`
+ships `dist` and this `CLAUDE.md`.
