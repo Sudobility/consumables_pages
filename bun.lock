@@ -7,7 +7,7 @@
       "devDependencies": {
         "@eslint/js": "~10.0.1",
         "@revenuecat/purchases-js": "~1.73.1",
-        "@sudobility/consumables_client": "^0.0.41",
+        "@sudobility/consumables_client": "^0.0.42",
         "@sudobility/design": "^1.1.71",
         "@testing-library/jest-dom": "~7.0.1",
         "@testing-library/react": "~16.3.3",
@@ -35,9 +35,9 @@
       },
       "peerDependencies": {
         "@revenuecat/purchases-js": "^1.0.0",
-        "@sudobility/consumables_client": "^0.0.41",
+        "@sudobility/consumables_client": "^0.0.42",
         "@sudobility/design": "^1.1.71",
-        "@sudobility/types": "^1.9.79",
+        "@sudobility/types": "^1.10.1",
         "react": "^18.0.0 || ^19.0.0",
         "react-dom": "^18.0.0 || ^19.0.0",
       },
@@ -202,7 +202,7 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/consumables_client": ["@sudobility/consumables_client@0.0.41", "https://npm.pkg.github.com/download/@sudobility/consumables_client/0.0.41/024ad03fa09b00a6070ae70b02d1b298375f1e67", { "peerDependencies": { "@sudobility/types": "^1.9.79", "react": "^18.0.0 || ^19.0.0" } }, "sha512-QqYkpIho8E3HHboDmfAwn1dPJRZx6Pm19aQI0qeLJIHxakIJ2mVrkOSrQfz04jrAh34uwDrysPQvHz65cCa/hA=="],
+    "@sudobility/consumables_client": ["@sudobility/consumables_client@0.0.42", "https://npm.pkg.github.com/download/@sudobility/consumables_client/0.0.42/a9f418246838b470c8f54aca1ad710b1d787dbf7", { "peerDependencies": { "@sudobility/types": "^1.10.1", "react": "^18.0.0 || ^19.0.0" } }, "sha512-v3H66w85/C8/EKPmfr/Qu7av0sPdse4M22cw8wLrZiV7OhmoSo1BVSW89zw3t43jr5HKSYKJZLShEOdXd4MgAw=="],
 
     "@sudobility/design": ["@sudobility/design@1.1.71", "https://npm.pkg.github.com/download/@sudobility/design/1.1.71/e3a174cea0da29ebb2f1c590750c647cf3d7e11c", { "peerDependencies": { "clsx": ">=2.0.0", "tailwind-merge": ">=2.0.0" } }, "sha512-qqQn+OLksBqqMePYz2Zv2eXl2GCt6fk+WBUvhzhKx2ZMZdrf2JlIvIdWq9qOvdZlhizxuwMMl4dI8orMI43Ikw=="],
 
